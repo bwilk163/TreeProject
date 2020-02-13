@@ -8,9 +8,9 @@ namespace Zadanie_Testowe.Services
 {
     public class TreeService : ITreeService
     {
-        private readonly Models.ZadanieTestoweEntities Db;
+        private readonly Models.DbModel Db;
      
-        public TreeService (Zadanie_Testowe.Models.ZadanieTestoweEntities zadanieTestoweEntities)
+        public TreeService (Zadanie_Testowe.Models.DbModel zadanieTestoweEntities)
         {
             Db = zadanieTestoweEntities;
         }
