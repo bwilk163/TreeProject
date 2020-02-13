@@ -25,7 +25,7 @@ namespace Zadanie_Testowe.Services
             return Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
         }
    
-        public IList<TreeElement> GetChildren(Guid parentId)
+        public IList<TreeElement> GetChildren(Guid? parentId)
         {
             IList<TreeElement> children = Db.TreeElements.Where(x => x.ParentId == parentId).ToList();
 

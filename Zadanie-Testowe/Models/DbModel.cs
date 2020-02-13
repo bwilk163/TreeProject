@@ -4,20 +4,19 @@ namespace Zadanie_Testowe.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Data.SqlClient;
 
     public partial class DbModel : DbContext
     {
-        public DbModel()
-            : base("name=Model1")
+        public DbSet<TreeElement> TreeElements { get; set; }
+        public DbModel() : base("name=Model1")
         {
         }
-
-        public virtual DbSet<TreeElement> TreeElements { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TreeElement>()
-                .HasKey(t => t.ParentId);
+                .HasKey(t => t.Guid);
         }
     }
 }

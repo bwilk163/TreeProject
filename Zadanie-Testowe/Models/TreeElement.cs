@@ -9,6 +9,6 @@ namespace Zadanie_Testowe.Models
     {
         public Guid Guid { get; set; }
         public string Value { get; set; }
-        public Guid ParentId { get; set; }
+        public Guid? ParentId { get; set; }
     }
 }

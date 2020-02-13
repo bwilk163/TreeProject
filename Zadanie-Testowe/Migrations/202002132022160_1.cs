@@ -3,7 +3,7 @@ namespace Zadanie_Testowe.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class _1 : DbMigration
     {
         public override void Up()
         {
@@ -11,11 +11,11 @@ namespace Zadanie_Testowe.Migrations
                 "dbo.TreeElements",
                 c => new
                     {
-                        ParentId = c.Guid(nullable: false),
                         Guid = c.Guid(nullable: false),
                         Value = c.String(),
+                        ParentId = c.Guid(),
                     })
-                .PrimaryKey(t => t.ParentId);
+                .PrimaryKey(t => t.Guid);
             
         }
         

@@ -87,3 +87,10 @@ C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Test
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.csproj.CopyComplete
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.dll
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.pdb
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie_Testowe.Migrations._1.resources
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.csproj.GenerateResource.cache
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie_Testowe.Migrations._2.resources
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\bin\System.Net.Http.Formatting.dll
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\bin\System.Web.Http.dll
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\bin\System.Net.Http.Formatting.xml
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\bin\System.Web.Http.xml
