@@ -8,5 +8,66 @@
 
 </div>
 
-<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="mainDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $.ajax({
+        url: 'GetRootsPartial',
+        success: function (data) {
+            $("#root").append(data);
+        },
+        error: function (e) {
+            console.log(e)
+        }
+    })
+    $("#mainDeleteBtn").on("click", function () {
+        var itemDelId = this.getAttribute("data-delItemId");
+        $.ajax({
+            url: "DeleteElement",
+            data: { treeElementGuid: itemDelId },
+            success: function (e) {
+                $("[data-id=" + e.Guid + "]").remove();
+            },
+            complete: function (e) {
+                $("#myModal").modal('toggle')
+            }
+        })
+    })
+    dragged = null;
+    dropzone = null;
+    function SetDraggedEl(el) {
+        dragged = el
+    }
+    function SetDropzone(el) {
+        if ($(el).attr("data-id")) {
+            dropzone = el;
+            console.log(el);
+        }
+    }
+
+    function OnDropEl(el) {
+        console.log($(dropzone));
+    }
+</script>
 <script src="~/Scripts/Custom/TreeShower.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>

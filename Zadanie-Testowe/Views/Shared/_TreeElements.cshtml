@@ -1,0 +1,43 @@
+﻿@model Zadanie_Testowe.Models.TreeElementView
+
+<ul>
+    @if (Model.Element != null)
+    {
+        <li>
+            <form onsubmit="AddNewElement(event)">
+                <input  data-dropId=@Model.Element.Guid draggable="true" type="text" placeholder="Drop/Add to {@Model.Element.Value}" />
+                <input type="text" value=@Model.Element.Guid />
+                <input type="submit" />
+            </form>
+        </li>
+    }
+    @foreach (Zadanie_Testowe.Models.TreeElement element in Model.Children)
+    {
+        @Html.Partial("_TreeElement", element);
+    }
+
+</ul>
+<script>
+    function AddNewElement(e) {
+        var value = $(e.target[0])[0].value
+        var parent = e.target[1].value
+        $.ajax({
+            url: "AddElement",
+            mathod: "post",
+            data: {
+                Value: value,
+                ParentId: parent
+            },
+            success: function (data) {
+                console.log(data);
+
+                var p = $("[data-parent=" + parent + "] > ul");
+
+                $(p).append(data);
+            }
+        })
+        $(e.target[0])[0].value = "";
+        e.preventDefault();
+    }
+
+</script>

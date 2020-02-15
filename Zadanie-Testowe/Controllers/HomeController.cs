@@ -30,36 +30,43 @@ namespace Zadanie_Testowe.Controllers
         public PartialViewResult GetRootsPartial()
         {
             var result = _treeService.GetChildrenByParentId(null);
-            return PartialView("_TreeElementView", result);
+            return PartialView("_TreeElements", new TreeElementView(null, result));
         }
-        public JsonResult GetRoots()
+        //public JsonResult GetRoots()
+        //{
+        //    return Json(_treeService.GetChildrenByParentId(null), JsonRequestBehavior.AllowGet);
+        //}
+        //public JsonResult GetById(Guid guid)
+        //{
+        //    return Json(_treeService.GetById(guid), JsonRequestBehavior.AllowGet);
+        //}
+        public PartialViewResult GetChildrenByParentId(Guid parentId)
         {
-            return Json(_treeService.GetChildrenByParentId(null), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetById(Guid guid)
-        {
-            return Json(_treeService.GetById(guid), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetChildrenByParentId(Guid parentId)
-        {
-            return Json(_treeService.GetChildrenByParentId(parentId), JsonRequestBehavior.AllowGet);
+            var result = _treeService.GetChildrenByParentId(parentId);
+            var element = _treeService.GetById(parentId);
+            return PartialView("_TreeElements", new TreeElementView(element, result));
         }
 
-        public JsonResult AddElement([FromBody] TreeElement treeElement)
+        public PartialViewResult AddElement([FromBody] TreeElement treeElement)
         {
             treeElement.Guid = Guid.NewGuid();
-            var newElement= _treeService.AddElement(treeElement);
-            return Json(newElement, JsonRequestBehavior.AllowGet);
+            var newElement = _treeService.AddElement(treeElement);
+            return PartialView("_TreeElement", newElement);
         }
 
-        public TreeElement UpdateElement(Guid elementGuid, TreeElement treeElement)
-        {
-            return _treeService.UpdateElement(elementGuid, treeElement);
-        }
+        //public TreeElement UpdateElement(Guid elementGuid, TreeElement treeElement)
+        //{
+        //    return _treeService.UpdateElement(elementGuid, treeElement);
+        //}
 
-        public TreeElement ChangeParent(Guid treeElement, Guid newParent)
+        //public TreeElement ChangeParent(Guid treeElement, Guid newParent)
+        //{
+        //    return _treeService.ChangeParent(treeElement, newParent);
+        //}
+        public JsonResult DeleteElement(Guid treeElementGuid)
         {
-            return _treeService.ChangeParent(treeElement, newParent);
+            return Json(_treeService.DeleteElement(treeElementGuid), JsonRequestBehavior.AllowGet);
+            return Json("Deleted", JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -162,6 +162,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\TreeElement.cs" />
+    <Compile Include="Models\TreeElementView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITreeService.cs" />
     <Compile Include="Services\TreeService.cs" />
@@ -203,8 +204,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\_TreeElement.cshtml" />
-    <Content Include="Views\_TreeElementView.cshtml" />
+    <Content Include="Views\Shared\_TreeElements.cshtml" />
+    <Content Include="Views\Shared\_TreeElement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

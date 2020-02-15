@@ -1,0 +1,48 @@
+﻿@model Zadanie_Testowe.Models.TreeElement
+
+    <li data-id=@Model.Guid ondragover="OnDragOver(event)">
+        <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
+        @if (Model.ParentId != null)
+        {
+            <a onclick="AskForDel('@Model.Guid')" id="delBtn" href="#myModal" class="btn btn-danger">Delete</a>
+            <button class="btn" draggable="true"
+                    ondragend="OnDrop(event)"
+                    ondragover="OnDragOver(event)"
+                    ondragstart="OnDragStart(event)">Drag</button>
+            <button class="btn btn-sm">Edit</button>
+        }
+        @Model.Value
+        <div id="children" data-parent="@Model.Guid"></div>
+        <script>
+            function LoadChildren(id) {
+                if (HasElement(id) == false) {
+                    $.ajax({
+                        url: 'GetChildrenByParentId',
+                        data: { parentId: id },
+                        success: function (d) {
+                            var parent = $("[data-parent=" + id + "]");
+                            $(parent).append(d)
+                            childrenCreated = true;
+
+                            AddElement(id);
+                        },
+                    })
+                }
+            }
+
+            function AskForDel(guid) {
+                $("#mainDeleteBtn").attr("data-delItemId", guid);
+                $("#myModal").modal('toggle')
+            }
+
+            function OnDrop(e) {
+                OnDropEl();
+            }
+            function OnDragOver(e) {
+                SetDropzone($(e.target));
+            }
+            function OnDragStart(e) {
+                SetDraggedEl($(e))
+            }
+        </script>
+    </li>

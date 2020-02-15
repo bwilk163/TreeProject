@@ -9,22 +9,22 @@ namespace Zadanie_Testowe.Services
     public class TreeService : ITreeService
     {
         private readonly Models.DbModel Db;
-     
-        public TreeService (Zadanie_Testowe.Models.DbModel zadanieTestoweEntities)
+
+        public TreeService(Zadanie_Testowe.Models.DbModel zadanieTestoweEntities)
         {
             Db = zadanieTestoweEntities;
         }
-    
+
         public IList<TreeElement> GetAll()
         {
             return Db.TreeElements.ToList();
         }
-    
+
         public TreeElement GetById(Guid guid)
         {
             return Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
         }
-   
+
         public IList<TreeElement> GetChildrenByParentId(Guid? parentId)
         {
             IList<TreeElement> children = Db.TreeElements.Where(x => x.ParentId == parentId).ToList();
@@ -39,7 +39,7 @@ namespace Zadanie_Testowe.Services
 
             return addedElement;
         }
-    
+
         public TreeElement UpdateElement(Guid guid, TreeElement treeElement)
         {
             var element = Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
@@ -56,6 +56,17 @@ namespace Zadanie_Testowe.Services
         {
             var element = Db.TreeElements.FirstOrDefault(x => x.Guid == treeElement);
             element.ParentId = newParent;
+
+            Db.SaveChanges();
+
+            return element;
+        }
+
+        public TreeElement DeleteElement(Guid guid)
+        {
+            var element = Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
+            if (element != null)
+                Db.TreeElements.Remove(element);
 
             Db.SaveChanges();
 

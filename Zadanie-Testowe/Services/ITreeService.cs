@@ -17,5 +17,7 @@ namespace Zadanie_Testowe.Services
         TreeElement UpdateElement(Guid elementGuid, TreeElement treeElement);
 
         TreeElement ChangeParent(Guid treeElement, Guid newParent);
+
+        TreeElement DeleteElement(Guid guid);
     }
 }
