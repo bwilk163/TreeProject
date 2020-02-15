@@ -27,22 +27,29 @@ namespace Zadanie_Testowe.Controllers
         {
             return Json(_treeService.GetAll(), JsonRequestBehavior.AllowGet);
         }
+        public PartialViewResult GetRootsPartial()
+        {
+            var result = _treeService.GetChildrenByParentId(null);
+            return PartialView("_TreeElementView", result);
+        }
         public JsonResult GetRoots()
         {
-            return Json(_treeService.GetChildren(null), JsonRequestBehavior.AllowGet);
+            return Json(_treeService.GetChildrenByParentId(null), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetById(Guid guid)
         {
             return Json(_treeService.GetById(guid), JsonRequestBehavior.AllowGet);
         }
-        public IList<TreeElement> GetChildren(Guid parentId)
+        public JsonResult GetChildrenByParentId(Guid parentId)
         {
-            return _treeService.GetChildren(parentId);
+            return Json(_treeService.GetChildrenByParentId(parentId), JsonRequestBehavior.AllowGet);
         }
 
-        public TreeElement AddElement([FromBody] TreeElement treeElement)
+        public JsonResult AddElement([FromBody] TreeElement treeElement)
         {
-            return _treeService.AddElement(treeElement);
+            treeElement.Guid = Guid.NewGuid();
+            var newElement= _treeService.AddElement(treeElement);
+            return Json(newElement, JsonRequestBehavior.AllowGet);
         }
 
         public TreeElement UpdateElement(Guid elementGuid, TreeElement treeElement)

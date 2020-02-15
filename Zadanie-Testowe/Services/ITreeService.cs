@@ -10,7 +10,7 @@ namespace Zadanie_Testowe.Services
     {
         IList<TreeElement> GetAll();
         TreeElement GetById(Guid guid);
-        IList<TreeElement> GetChildren(Guid? parentId);
+        IList<TreeElement> GetChildrenByParentId(Guid? parentId);
 
         TreeElement AddElement(TreeElement treeElement);
 
