@@ -12,7 +12,9 @@
 
 
 <div id="root">
+    <ul>
 
+    </ul>
 </div>
 
 
@@ -41,7 +43,7 @@
     $.ajax({
         url: '/Home/GetRootsPartial',
         success: function (data) {
-            $("#root").append(data);
+            $("#root > ul").append(data);
         },
         error: function (e) {
             console.log(e)

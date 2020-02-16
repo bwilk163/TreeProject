@@ -1,16 +1,24 @@
 ﻿@model Zadanie_Testowe.Models.TreeElement
 
-    <li data-id=@Model.Guid data-value=@Model.Value draggable="true" ondragstart="SetDraggedElement(event)">
-        <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
-        @if (User.Identity.IsAuthenticated)
-        {
-        if (Model.ParentId != null)
-        {
-            <a onclick="AskForDel('@Model.Guid')" id="delBtn" href="#myModal" class="btn btn-danger">Delete</a>
-        }
+    <li data-id=@Model.Guid data-value=@Model.Value>
+        <div data-elementContainer=@Model.Guid
+             draggable="true"
+             ondragstart="SetDraggedElement(event)"
+             ondragend="OnDragEnd(event)"
+             ondrop="OnDragEnd(event)"
 
-            <button data-updateId="@Model.Guid" onclick="ToggleEditInput('@Model.Guid')" class="btn">Edit</button>
-        }
+             >
+           
+            <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (Model.ParentId != null)
+                {
+                    <a onclick="AskForDel('@Model.Guid')" id="delBtn" href="#myModal" class="btn btn-danger">Delete</a>
+                }
+
+                <button data-updateId="@Model.Guid" onclick="ToggleEditInput('@Model.Guid')" class="btn">Edit</button>
+            }
             <div style="display: inline" data-display=@Model.Guid onclick="Sort('@Model.Guid')">
                 @Model.Value
             </div>
@@ -21,8 +29,12 @@
                     <input type="text" placeholder="New Name" value="@Model.Value" />
                 </form>
             }
-            <div id="children" style="display: none" data-parent="@Model.Guid"></div>
-
+        </div>
+            <div id="children" style="display: none" data-parent="@Model.Guid">
+                <ul>
+                </ul>
+            </div>
+        
             <script>
                 function ToggleChildren(guid) {
                     var childrenEl = $("[data-parent=" + guid + "]");
@@ -38,7 +50,7 @@
                             url: '/Home/GetChildrenByParentId',
                             data: { parentId: id },
                             success: function (d) {
-                                var parent = $("[data-parent=" + id + "]");
+                                var parent = $("[data-parent=" + id + "] > ul");
                                 $(parent).append(d)
                                 childrenCreated = true;
 
@@ -87,13 +99,14 @@
                 var sortDir = -1; //1 = asc, -1 = desc
                 function Sort(parentId) {
                     var $wrapper = $("[data-parent=" + parentId + "] > ul");
-                    var children = $wrapper.find('li').slice(1);
+                    var children = $wrapper.children('li').slice(1);
                     sortDir *= -1;
-
+                    
+                    console.log(children)
                     children.sort(function (a, b) {
                         return a.dataset.value.localeCompare(b.dataset.value) * sortDir;
                     })
-                        .appendTo($wrapper);
+                        .appendTo($wrapper );
                 }
             </script>
         </li>

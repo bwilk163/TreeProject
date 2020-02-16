@@ -1,6 +1,6 @@
 ﻿@model Zadanie_Testowe.Models.TreeElementView
 
-<ul>
+
     @if (Model.Element != null)
     {
        if (User.Identity.IsAuthenticated)
@@ -19,7 +19,6 @@
         @Html.Partial("_TreeElement", element);
     }
 
-</ul>
 <script>
     function AddNewElement(e) {
         var value = $(e.target[0])[0].value

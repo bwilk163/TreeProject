@@ -16,8 +16,12 @@ function HasElement(guid) {
 
 function SetDraggedElement(e) {
     console.log("Dragged", e);
+    
 }
 
-function OnDrop(e) {
-    console.log("OnDrop",e);
+function OnDragEnd(e) {
+    console.log("OnDrop", e.target.getAttribute("data-elementContainer"));
+
+
+    e.preventDefault();
 }
