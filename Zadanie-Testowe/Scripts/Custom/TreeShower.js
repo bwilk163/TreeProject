@@ -14,14 +14,39 @@ function HasElement(guid) {
     return true;
 }
 
+var dragged = null;
 function SetDraggedElement(e) {
-    console.log("Dragged", e);
-    
+    dragged = $(e.target).attr("data-elementcontainer");
 }
 
 function OnDragEnd(e) {
-    console.log("OnDrop", e.target.getAttribute("data-elementContainer"));
+    var p = $(e.target);
+    var newId =null
+    if (p.attr("data-elementcontainer"))
+        newId = p.attr("data-elementcontainer");
+    if (p.attr("data-display"))
+        newId = p.attr("data-display")
 
+    if (dragged != newId) {
+        var draggedEl = $("[data-id=" + dragged + "]")[0];
+        console.log("draging ", draggedEl);
+        var newEl = $("[data-parent=" + newId + "] > ul")[0];
 
+        $.ajax({
+            url: "/Home/ChangeParent",
+            data: { treeElement: dragged, newParent: newId },
+            success: function (e) {
+                // if ok
+                if (e) {
+                    newEl.appendChild(draggedEl);
+                }
+            }
+
+        })
+    }
+}
+
+function OnDragOver(e) {
     e.preventDefault();
+
 }

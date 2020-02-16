@@ -1,13 +1,11 @@
 ﻿@model Zadanie_Testowe.Models.TreeElement
 
-    <li data-id=@Model.Guid data-value=@Model.Value>
+    <li data-id=@Model.Guid data-thisParentId='@Model.ParentId' data-value=@Model.Value>
         <div data-elementContainer=@Model.Guid
              draggable="true"
              ondragstart="SetDraggedElement(event)"
-             ondragend="OnDragEnd(event)"
-             ondrop="OnDragEnd(event)"
-
-             >
+             ondragover="OnDragOver(event)"
+             ondrop="OnDragEnd(event)" >
            
             <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
             @if (User.Identity.IsAuthenticated)

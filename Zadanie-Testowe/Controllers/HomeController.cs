@@ -65,10 +65,10 @@ namespace Zadanie_Testowe.Controllers
             return null;
         }
 
-        //public TreeElement ChangeParent(Guid treeElement, Guid newParent)
-        //{
-        //    return _treeService.ChangeParent(treeElement, newParent);
-        //}
+        public TreeElement ChangeParent(Guid treeElement, Guid newParent)
+        {
+            return _treeService.ChangeParent(treeElement, newParent);
+        }
         public JsonResult DeleteElement(Guid treeElementGuid)
         {
             return Json(_treeService.DeleteElement(treeElementGuid), JsonRequestBehavior.AllowGet);
