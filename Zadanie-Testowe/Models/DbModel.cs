@@ -9,6 +9,7 @@ namespace Zadanie_Testowe.Models
     public partial class DbModel : DbContext
     {
         public DbSet<TreeElement> TreeElements { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbModel() : base("name=Model1")
         {
         }
@@ -17,6 +18,8 @@ namespace Zadanie_Testowe.Models
         {
             modelBuilder.Entity<TreeElement>()
                 .HasKey(t => t.Guid);
+            modelBuilder.Entity<User>()
+                .HasKey(t => t.Username);
         }
     }
 }

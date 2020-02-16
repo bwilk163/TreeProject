@@ -1,8 +1,15 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
+    <nav class="navbar navbar-light bg-info">
+        <form class="form-inline">
+            <div class="input-group">
+                <a class="btn btn-primary" href=@Url.Action("Login","Users")>Login</a>
+            </div>
+        </form>
+    </nav>
+
+
 
 <div id="root">
 
@@ -10,6 +17,7 @@
 
 
 <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
 
 
 <div id="myModal" class="modal">
@@ -56,5 +64,3 @@
 </script>
 
 <script src="~/Scripts/Custom/TreeShower.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/jquery-3.4.1.js"></script>

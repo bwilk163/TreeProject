@@ -46,6 +46,14 @@ namespace Zadanie_Testowe.Migrations
                     Value = "Warszawa",
                     ParentId = Guid.Parse("f55266dd-84c9-4441-8a29-3e8bae49e9fc")
                 });
+
+            context.Users.AddOrUpdate(x => x.Username,
+                new User()
+                {
+                    Email = "test@.mail.com",
+                    Username = "tests",
+                    Password = "MySercretPw"
+                });
         }
     }
 }

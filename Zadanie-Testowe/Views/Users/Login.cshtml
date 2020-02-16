@@ -1,0 +1,76 @@
+﻿@model Zadanie_Testowe.Models.User
+
+@if (!User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        <div class="bs-example" style="border:2px solid gray;">
+
+            <div class="form-group centerlook">
+                <h1> Login </h1>
+            </div>
+            <div class="form-group centerlook">
+                <label>User Name: </label>
+                @Html.EditorFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+            <div class="form-group centerlook">
+                <label>Password:</label>
+                @Html.PasswordFor(model => model.Password)
+
+            </div>
+            <div class="loginbtn">
+
+                <input type="submit" value="Login" class="btn btn-primary" />
+
+            </div>
+        </div>
+    }
+
+    using (Html.BeginForm())
+    {
+        <div class="bs-example" style="border:2px solid gray;">
+
+            <div class="form-group centerlook">
+                <h1> Register </h1>
+            </div>
+            <div class="form-group centerlook">
+                @Html.LabelFor(model => model.Username)
+                @Html.EditorFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+            <div class="form-group centerlook">
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+            <div class="form-group centerlook">
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+
+            </div>
+            <div class="form-group error">
+                @if (@ViewBag.Failedcount != null)
+                {
+
+                    <label> Failed Attempt count is: @ViewBag.Failedcount</label>
+                }
+
+                @if (@ViewBag.NotValidUser != null)
+                {
+
+                    <label> @ViewBag.NotValidUser</label>
+                }
+            </div>
+            <div class="loginbtn">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+}
+else { 
+<div>
+    <a class="btn btn-primary" href=@Url.Action("Logout","Users")>Login</a>
+</div>
+        }

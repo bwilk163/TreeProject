@@ -3,6 +3,8 @@
 <ul>
     @if (Model.Element != null)
     {
+       if (User.Identity.IsAuthenticated)
+        {
         <li>
             <form onsubmit="AddNewElement(event)">
                 <input  data-dropId=@Model.Element.Guid draggable="true" type="text" placeholder="Add to {@Model.Element.Value}" />
@@ -10,6 +12,7 @@
                 <input type="submit" />
             </form>
         </li>
+        }
     }
     @foreach (Zadanie_Testowe.Models.TreeElement element in Model.Children)
     {

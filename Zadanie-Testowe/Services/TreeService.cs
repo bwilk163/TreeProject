@@ -15,6 +15,31 @@ namespace Zadanie_Testowe.Services
             Db = zadanieTestoweEntities;
         }
 
+        public User Login(User u)
+        {
+            var dbUser = Db.Users.FirstOrDefault(x => x.Username == u.Username);
+            if(dbUser!= null)
+            {
+                if(dbUser.Password == u.Password)
+                {
+                    return dbUser;
+                }
+            }
+            return null;
+        }
+        public User Register(User u)
+        {
+            var dbUser = Db.Users.FirstOrDefault(x => x.Username == u.Username);
+            if (dbUser == null)
+            {
+               var newU = Db.Users.Add(u);
+                Db.SaveChanges();
+                return newU;
+            }
+
+            return null;
+        }
+
         public IList<TreeElement> GetAll()
         {
             return Db.TreeElements.ToList();

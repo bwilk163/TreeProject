@@ -13,3 +13,11 @@ function HasElement(guid) {
         return false;
     return true;
 }
+
+function SetDraggedElement(e) {
+    console.log("Dragged", e);
+}
+
+function OnDrop(e) {
+    console.log("OnDrop",e);
+}

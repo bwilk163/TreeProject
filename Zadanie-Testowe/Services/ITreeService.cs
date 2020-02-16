@@ -8,6 +8,8 @@ namespace Zadanie_Testowe.Services
 {
     public interface ITreeService
     {
+        User Login(User u);
+        User Register(User u);
         IList<TreeElement> GetAll();
         TreeElement GetById(Guid guid);
         IList<TreeElement> GetChildrenByParentId(Guid? parentId);

@@ -1,95 +1,99 @@
 ﻿@model Zadanie_Testowe.Models.TreeElement
 
-<li data-id=@Model.Guid data-value=@Model.Value>
-    <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
-    @if (Model.ParentId != null)
-    {
-        <a onclick="AskForDel('@Model.Guid')" id="delBtn" href="#myModal" class="btn btn-danger">Delete</a>
-
-    }
-
-    <button data-updateId="@Model.Guid" onclick="ToggleEditInput('@Model.Guid')" class="btn">Edit</button>
-    <div style="display: inline" data-display=@Model.Guid onclick="Sort('@Model.Guid')">
-    @Model.Value
-    </div>
-    
-
-    <form style=" display: none" data-updateFormId="@Model.Guid" onsubmit="UpdateValue(event)">
-        <input type="text" placeholder="New Name" value="@Model.Value" />
-    </form>
-    <div id="children" style="display: none" data-parent="@Model.Guid"></div>
-
-    <script>
-        function ToggleChildren(guid) {
-            var childrenEl = $("[data-parent=" + guid + "]");
-            if (childrenEl.css("display") == "none")
-                    childrenEl.css("display", "block")
-            else
-                childrenEl.css("display", "none")
-
+    <li data-id=@Model.Guid data-value=@Model.Value draggable="true" ondragstart="SetDraggedElement(event)">
+        <button onclick="LoadChildren('@Model.Guid')" class="btn">></button>
+        @if (User.Identity.IsAuthenticated)
+        {
+        if (Model.ParentId != null)
+        {
+            <a onclick="AskForDel('@Model.Guid')" id="delBtn" href="#myModal" class="btn btn-danger">Delete</a>
         }
-        function LoadChildren(id) {
-            if (HasElement(id) == false) {
-                $.ajax({
-                    url: '/Home/GetChildrenByParentId',
-                    data: { parentId: id },
-                    success: function (d) {
-                        var parent = $("[data-parent=" + id + "]");
-                        $(parent).append(d)
-                        childrenCreated = true;
 
-                        AddElement(id);
-                    },
-                })
+            <button data-updateId="@Model.Guid" onclick="ToggleEditInput('@Model.Guid')" class="btn">Edit</button>
+        }
+            <div style="display: inline" data-display=@Model.Guid onclick="Sort('@Model.Guid')">
+                @Model.Value
+            </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form style=" display: none" data-updateFormId="@Model.Guid" onsubmit="UpdateValue(event)">
+                    <input type="text" placeholder="New Name" value="@Model.Value" />
+                </form>
             }
-            ToggleChildren(id)
-        }
+            <div id="children" style="display: none" data-parent="@Model.Guid"></div>
 
-        function AskForDel(guid) {
-            $("#mainDeleteBtn").attr("data-delItemId", guid);
-            $("#myModal").modal('toggle')
-        }
-
-        function ToggleEditInput(guid) {
-            var el = $("[data-updateFormId=" + guid + "]")
-            if (el.css("display") == "none")
-                    el.css("display", "inline")
-            else
-                el.css("display", "none")
-        }
-        function UpdateValue(e) {
-            e.preventDefault();
-            var id = $(e.target).attr("data-updateformid");
-            var prevValue = $("[data-display=" + id + "]")[0].innerHTML;
-            var value = e.target[0].value;
-            $.ajax({
-                url: "/Home/UpdateElement",
-                data: {
-                    elementGuid: id,
-                    Value: value
-                },
-                success: function (data) {
-                    if (data.Value)
-                        $("[data-display=" + id + "]")[0].innerHTML = value
+            <script>
+                function ToggleChildren(guid) {
+                    var childrenEl = $("[data-parent=" + guid + "]");
+                    if (childrenEl.css("display") == "none")
+                        childrenEl.css("display", "block")
                     else
-                        $("[data-display=" + id + "]")[0].innerHTML = prevValue;
-                },
-                error: function (e) {
+                        childrenEl.css("display", "none")
+
                 }
-            })
-            ToggleEditInput(id);
-        }
+                function LoadChildren(id) {
+                    if (HasElement(id) == false) {
+                        $.ajax({
+                            url: '/Home/GetChildrenByParentId',
+                            data: { parentId: id },
+                            success: function (d) {
+                                var parent = $("[data-parent=" + id + "]");
+                                $(parent).append(d)
+                                childrenCreated = true;
 
-        var sortDir = -1; //1 = asc, -1 = desc
-        function Sort(parentId) {
-            var $wrapper = $("[data-parent=" + parentId + "] > ul");
-            var children = $wrapper.find('li').slice(1);
-            sortDir *= -1;
+                                AddElement(id);
+                            },
+                        })
+                    }
+                    ToggleChildren(id)
+                }
 
-            children.sort(function (a, b) {
-                return a.dataset.value.localeCompare(b.dataset.value) * sortDir;
-            })
-                .appendTo($wrapper);
-        }
-    </script>
-</li>
+                function AskForDel(guid) {
+                    $("#mainDeleteBtn").attr("data-delItemId", guid);
+                    $("#myModal").modal('toggle')
+                }
+
+                function ToggleEditInput(guid) {
+                    var el = $("[data-updateFormId=" + guid + "]")
+                    if (el.css("display") == "none")
+                        el.css("display", "inline")
+                    else
+                        el.css("display", "none")
+                }
+                function UpdateValue(e) {
+                    e.preventDefault();
+                    var id = $(e.target).attr("data-updateformid");
+                    var prevValue = $("[data-display=" + id + "]")[0].innerHTML;
+                    var value = e.target[0].value;
+                    $.ajax({
+                        url: "/Home/UpdateElement",
+                        data: {
+                            elementGuid: id,
+                            Value: value
+                        },
+                        success: function (data) {
+                            if (data.Value)
+                                $("[data-display=" + id + "]")[0].innerHTML = value
+                            else
+                                $("[data-display=" + id + "]")[0].innerHTML = prevValue;
+                        },
+                        error: function (e) {
+                        }
+                    })
+                    ToggleEditInput(id);
+                }
+
+                var sortDir = -1; //1 = asc, -1 = desc
+                function Sort(parentId) {
+                    var $wrapper = $("[data-parent=" + parentId + "] > ul");
+                    var children = $wrapper.find('li').slice(1);
+                    sortDir *= -1;
+
+                    children.sort(function (a, b) {
+                        return a.dataset.value.localeCompare(b.dataset.value) * sortDir;
+                    })
+                        .appendTo($wrapper);
+                }
+            </script>
+        </li>
