@@ -54,10 +54,12 @@ namespace Zadanie_Testowe.Controllers
             return PartialView("_TreeElement", newElement);
         }
 
-        //public TreeElement UpdateElement(Guid elementGuid, TreeElement treeElement)
-        //{
-        //    return _treeService.UpdateElement(elementGuid, treeElement);
-        //}
+        public JsonResult UpdateElement(Guid elementGuid, TreeElement treeElement)
+        {
+            if (ModelState.IsValid)
+                return Json(_treeService.UpdateElement(elementGuid, treeElement), JsonRequestBehavior.AllowGet);
+            return null;
+        }
 
         //public TreeElement ChangeParent(Guid treeElement, Guid newParent)
         //{

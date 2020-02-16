@@ -29,6 +29,7 @@
         </div>
     </div>
 </div>
+<div id="xD"></div>
 <script>
     $.ajax({
         url: 'GetRootsPartial',
@@ -45,6 +46,7 @@
             url: "DeleteElement",
             data: { treeElementGuid: itemDelId },
             success: function (e) {
+                console.log(e)
                 $("[data-id=" + e.Guid + "]").remove();
             },
             complete: function (e) {
@@ -52,22 +54,8 @@
             }
         })
     })
-    dragged = null;
-    dropzone = null;
-    function SetDraggedEl(el) {
-        dragged = el
-    }
-    function SetDropzone(el) {
-        if ($(el).attr("data-id")) {
-            dropzone = el;
-            console.log(el);
-        }
-    }
-
-    function OnDropEl(el) {
-        console.log($(dropzone));
-    }
 </script>
+
 <script src="~/Scripts/Custom/TreeShower.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/jquery-3.4.1.js"></script>

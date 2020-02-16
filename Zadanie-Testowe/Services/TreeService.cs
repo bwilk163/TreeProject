@@ -45,7 +45,6 @@ namespace Zadanie_Testowe.Services
             var element = Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
 
             element.Value = treeElement.Value;
-            element.ParentId = treeElement.ParentId;
 
             Db.SaveChanges();
 
