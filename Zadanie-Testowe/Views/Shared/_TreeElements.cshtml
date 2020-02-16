@@ -22,18 +22,18 @@
         var value = $(e.target[0])[0].value
         var parent = e.target[1].value
         $.ajax({
-            url: "AddElement",
+            url: "/Home/AddElement",
             mathod: "post",
             data: {
                 Value: value,
                 ParentId: parent
             },
             success: function (data) {
-                console.log(data);
+                if (data) {
+                    var p = $("[data-parent=" + parent + "] > ul");
 
-                var p = $("[data-parent=" + parent + "] > ul");
-
-                $(p).append(data);
+                    $(p).append(data);
+                }
             }
         })
         $(e.target[0])[0].value = "";

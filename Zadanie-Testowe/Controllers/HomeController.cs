@@ -49,9 +49,13 @@ namespace Zadanie_Testowe.Controllers
 
         public PartialViewResult AddElement([FromBody] TreeElement treeElement)
         {
-            treeElement.Guid = Guid.NewGuid();
-            var newElement = _treeService.AddElement(treeElement);
-            return PartialView("_TreeElement", newElement);
+            if (ModelState.IsValid)
+            {
+                treeElement.Guid = Guid.NewGuid();
+                var newElement = _treeService.AddElement(treeElement);
+                return PartialView("_TreeElement", newElement);
+            }
+            return null;
         }
 
         public JsonResult UpdateElement(Guid elementGuid, TreeElement treeElement)

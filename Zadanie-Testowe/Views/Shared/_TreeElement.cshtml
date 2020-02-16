@@ -31,7 +31,7 @@
         function LoadChildren(id) {
             if (HasElement(id) == false) {
                 $.ajax({
-                    url: 'GetChildrenByParentId',
+                    url: '/Home/GetChildrenByParentId',
                     data: { parentId: id },
                     success: function (d) {
                         var parent = $("[data-parent=" + id + "]");
@@ -63,7 +63,7 @@
             var prevValue = $("[data-display=" + id + "]")[0].innerHTML;
             var value = e.target[0].value;
             $.ajax({
-                url: "Home/UpdateElement",
+                url: "/Home/UpdateElement",
                 data: {
                     elementGuid: id,
                     Value: value
