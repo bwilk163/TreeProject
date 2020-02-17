@@ -88,13 +88,13 @@ namespace Zadanie_Testowe.Services
             return element;
         }
 
-        public  TreeElement DeleteElement(Guid guid)
+        public TreeElement DeleteElement(Guid guid)
         {
             var element = Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
             if (element != null)
             {
-              element=  Db.TreeElements.Remove(element);
-                Db.SaveChanges();
+                Db.TreeElements.SqlQuery("DeleteItem @@ElGuid", guid);
+
             }
             return element;
         }

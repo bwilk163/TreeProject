@@ -1,7 +1,9 @@
 ﻿@model Zadanie_Testowe.Models.TreeElement
 
     <li data-id=@Model.Guid data-thisParentId='@Model.ParentId' data-value=@Model.Value>
-        <div data-elementContainer=@Model.Guid
+        <div
+             class="draggable"
+             data-elementContainer=@Model.Guid
              draggable="true"
              ondragstart="SetDraggedElement(event)"
              ondragover="OnDragOver(event)"

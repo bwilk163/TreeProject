@@ -27,3 +27,7 @@ textarea {
 .over{
     background-color: gray;
 }
+
+.draggable{
+    cursor: move;
+}
