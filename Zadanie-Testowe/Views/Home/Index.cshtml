@@ -55,7 +55,6 @@
             url: "/Home/DeleteElement",
             data: { treeElementGuid: itemDelId },
             success: function (e) {
-                console.log(e)
                 $("[data-id=" + e.Guid + "]").remove();
             },
             complete: function (e) {

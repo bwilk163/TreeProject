@@ -160,6 +160,10 @@
     <Compile Include="Migrations\202002161411136_3.Designer.cs">
       <DependentUpon>202002161411136_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002171712189_4.cs" />
+    <Compile Include="Migrations\202002171712189_4.Designer.cs">
+      <DependentUpon>202002171712189_4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\TreeElement.cs" />
@@ -232,6 +236,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002161411136_3.resx">
       <DependentUpon>202002161411136_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002171712189_4.resx">
+      <DependentUpon>202002171712189_4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

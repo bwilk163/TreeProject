@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Zadanie_Testowe.Models;
 
@@ -18,9 +20,9 @@ namespace Zadanie_Testowe.Services
         public User Login(User u)
         {
             var dbUser = Db.Users.FirstOrDefault(x => x.Username == u.Username);
-            if(dbUser!= null)
+            if (dbUser != null)
             {
-                if(dbUser.Password == u.Password)
+                if (dbUser.Password == u.Password)
                 {
                     return dbUser;
                 }
@@ -32,7 +34,7 @@ namespace Zadanie_Testowe.Services
             var dbUser = Db.Users.FirstOrDefault(x => x.Username == u.Username);
             if (dbUser == null)
             {
-               var newU = Db.Users.Add(u);
+                var newU = Db.Users.Add(u);
                 Db.SaveChanges();
                 return newU;
             }
@@ -86,14 +88,14 @@ namespace Zadanie_Testowe.Services
             return element;
         }
 
-        public TreeElement DeleteElement(Guid guid)
+        public  TreeElement DeleteElement(Guid guid)
         {
             var element = Db.TreeElements.FirstOrDefault(x => x.Guid == guid);
             if (element != null)
-                Db.TreeElements.Remove(element);
-
-            Db.SaveChanges();
-
+            {
+              element=  Db.TreeElements.Remove(element);
+                Db.SaveChanges();
+            }
             return element;
         }
     }

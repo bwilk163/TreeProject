@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace Zadanie_Testowe.Controllers
     {
         private readonly ITreeService _treeService;
 
-        public HomeController (ITreeService treeService)
+        public HomeController(ITreeService treeService)
         {
             _treeService = treeService;
         }
@@ -71,8 +72,8 @@ namespace Zadanie_Testowe.Controllers
         }
         public JsonResult DeleteElement(Guid treeElementGuid)
         {
-            return Json(_treeService.DeleteElement(treeElementGuid), JsonRequestBehavior.AllowGet);
-            return Json("Deleted", JsonRequestBehavior.AllowGet);
+            var result = _treeService.DeleteElement(treeElementGuid);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

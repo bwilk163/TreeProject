@@ -93,3 +93,4 @@ C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Test
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie_Testowe.Migrations._3.resources
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.csproj.GenerateResource.cache
 C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie-Testowe.csprojAssemblyReference.cache
+C:\Users\god\source\repos\Zadanie-Testowe\Zadanie-Testowe\obj\Debug\Zadanie_Testowe.Migrations._4.resources
